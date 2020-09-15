@@ -18,14 +18,14 @@ import com.e.convidados.viewmodel.AllGuestsViewModel
 
 class AllGuestsFragment : Fragment() {
 
-    private lateinit var allGuestsViewModel: AllGuestsViewModel
+    private lateinit var mViewModel: AllGuestsViewModel
     private val mAdapter = GuestAdapter()
     private lateinit var mListener: GuestListener
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
-        allGuestsViewModel =
+        mViewModel =
             ViewModelProvider(this).get(AllGuestsViewModel::class.java)
 
         val root = inflater.inflate(R.layout.fragment_all, container, false)
@@ -44,6 +44,11 @@ class AllGuestsFragment : Fragment() {
                 intent.putExtras(bundle)
                 startActivity(intent)
             }
+
+            override fun onDelete(id: Int) {
+                mViewModel.delete(id)
+                mViewModel.load()
+            }
         }
 
         mAdapter.attachListener(mListener)
@@ -54,12 +59,12 @@ class AllGuestsFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        allGuestsViewModel.load()
+        mViewModel.load()
 
     }
 
     private fun observer() {
-        allGuestsViewModel.guestList.observe(viewLifecycleOwner, Observer {
+        mViewModel.guestList.observe(viewLifecycleOwner, Observer {
             mAdapter.updateGuests(it)
         })
     }
