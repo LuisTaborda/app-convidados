@@ -23,7 +23,7 @@ class GuestRepository private constructor(context: Context) {
     }
 
     fun getAll(): List<GuestModel> {
-            val list: MutableList<GuestModel> = ArrayList()
+        val list: MutableList<GuestModel> = ArrayList()
 
         return try {
             val db = mGuestDataBaseHelper.readableDatabase
@@ -43,12 +43,15 @@ class GuestRepository private constructor(context: Context) {
                 null,
                 null
             )
-            if (cursor != null && cursor.count > 0){
-                while(cursor.moveToNext()){
+            if (cursor != null && cursor.count > 0) {
+                while (cursor.moveToNext()) {
 
-                    val id = cursor.getInt(cursor.getColumnIndex(DataBaseConstants.GUEST.COLUMNS.ID))
-                    val name = cursor.getString(cursor.getColumnIndex(DataBaseConstants.GUEST.COLUMNS.NAME))
-                    val presence = ( cursor.getInt(cursor.getColumnIndex(DataBaseConstants.GUEST.COLUMNS.PRESENCE)) == 1)
+                    val id =
+                        cursor.getInt(cursor.getColumnIndex(DataBaseConstants.GUEST.COLUMNS.ID))
+                    val name =
+                        cursor.getString(cursor.getColumnIndex(DataBaseConstants.GUEST.COLUMNS.NAME))
+                    val presence =
+                        (cursor.getInt(cursor.getColumnIndex(DataBaseConstants.GUEST.COLUMNS.PRESENCE)) == 1)
 
                     val guest = GuestModel(id, name, presence)
                     list.add(guest)
@@ -68,14 +71,18 @@ class GuestRepository private constructor(context: Context) {
         return try {
             val db = mGuestDataBaseHelper.readableDatabase
 
-            val cursor = db.rawQuery("SELECT id, name, presence FROM Guest WHERE presence = 1", null)
+            val cursor =
+                db.rawQuery("SELECT id, name, presence FROM Guest WHERE presence = 1", null)
 
-            if (cursor != null && cursor.count > 0){
-                while(cursor.moveToNext()){
+            if (cursor != null && cursor.count > 0) {
+                while (cursor.moveToNext()) {
 
-                    val id = cursor.getInt(cursor.getColumnIndex(DataBaseConstants.GUEST.COLUMNS.ID))
-                    val name = cursor.getString(cursor.getColumnIndex(DataBaseConstants.GUEST.COLUMNS.NAME))
-                    val presence = ( cursor.getInt(cursor.getColumnIndex(DataBaseConstants.GUEST.COLUMNS.PRESENCE)) == 1)
+                    val id =
+                        cursor.getInt(cursor.getColumnIndex(DataBaseConstants.GUEST.COLUMNS.ID))
+                    val name =
+                        cursor.getString(cursor.getColumnIndex(DataBaseConstants.GUEST.COLUMNS.NAME))
+                    val presence =
+                        (cursor.getInt(cursor.getColumnIndex(DataBaseConstants.GUEST.COLUMNS.PRESENCE)) == 1)
 
                     val guest = GuestModel(id, name, presence)
                     list.add(guest)
@@ -95,14 +102,18 @@ class GuestRepository private constructor(context: Context) {
         return try {
             val db = mGuestDataBaseHelper.readableDatabase
 
-            val cursor = db.rawQuery("SELECT id, name, presence FROM Guest WHERE presence = 0", null)
+            val cursor =
+                db.rawQuery("SELECT id, name, presence FROM Guest WHERE presence = 0", null)
 
-            if (cursor != null && cursor.count > 0){
-                while(cursor.moveToNext()){
+            if (cursor != null && cursor.count > 0) {
+                while (cursor.moveToNext()) {
 
-                    val id = cursor.getInt(cursor.getColumnIndex(DataBaseConstants.GUEST.COLUMNS.ID))
-                    val name = cursor.getString(cursor.getColumnIndex(DataBaseConstants.GUEST.COLUMNS.NAME))
-                    val presence = ( cursor.getInt(cursor.getColumnIndex(DataBaseConstants.GUEST.COLUMNS.PRESENCE)) == 1)
+                    val id =
+                        cursor.getInt(cursor.getColumnIndex(DataBaseConstants.GUEST.COLUMNS.ID))
+                    val name =
+                        cursor.getString(cursor.getColumnIndex(DataBaseConstants.GUEST.COLUMNS.NAME))
+                    val presence =
+                        (cursor.getInt(cursor.getColumnIndex(DataBaseConstants.GUEST.COLUMNS.PRESENCE)) == 1)
 
                     val guest = GuestModel(id, name, presence)
                     list.add(guest)
@@ -139,11 +150,13 @@ class GuestRepository private constructor(context: Context) {
                 null,
                 null
             )
-            if (cursor != null && cursor.count > 0){
+            if (cursor != null && cursor.count > 0) {
                 cursor.moveToFirst()
 
-                val name = cursor.getString(cursor.getColumnIndex(DataBaseConstants.GUEST.COLUMNS.NAME))
-                val presence = ( cursor.getInt(cursor.getColumnIndex(DataBaseConstants.GUEST.COLUMNS.PRESENCE)) == 1)
+                val name =
+                    cursor.getString(cursor.getColumnIndex(DataBaseConstants.GUEST.COLUMNS.NAME))
+                val presence =
+                    (cursor.getInt(cursor.getColumnIndex(DataBaseConstants.GUEST.COLUMNS.PRESENCE)) == 1)
 
                 guest = GuestModel(id, name, presence)
             }
@@ -200,6 +213,5 @@ class GuestRepository private constructor(context: Context) {
             false
         }
     }
-
 
 }
